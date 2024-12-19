@@ -1,4 +1,32 @@
 # Svelte 5 Component Patterns for LLM Code Generation
+## IMPORTANT ! CRITICAL RULES - NEVER BREAK THESE
+
+### ❌ NEVER Use These Svelte 4 Patterns:
+```javascript
+// ❌ WRONG: Don't use export statements
+export let count;
+export let onchange = () => {};
+
+// ❌ WRONG: Don't use reactive statements
+$: doubled = count * 2;
+
+// ❌ WRONG: Don't use stores
+import { writable } from 'svelte/store';
+const count = writable(0);
+
+// ❌ WRONG: Don't use event dispatcher
+const dispatch = createEventDispatcher();
+dispatch('change', value);
+
+// ❌ WRONG: Don't use on: directives
+<button on:click={handler}>
+<form on:submit|preventDefault={submit}>
+
+// ❌ WRONG: Don't use slots
+<slot name="header">
+<div slot="content">
+```
+
 
 ## EXACT PATTERNS TO FOLLOW
 
@@ -63,33 +91,7 @@ ALWAYS use this exact structure for every component:
 </style>
 ```
 
-## CRITICAL RULES - NEVER BREAK THESE
 
-### ❌ NEVER Use These Svelte 4 Patterns:
-```javascript
-// ❌ WRONG: Don't use export statements
-export let count;
-export let onchange = () => {};
-
-// ❌ WRONG: Don't use reactive statements
-$: doubled = count * 2;
-
-// ❌ WRONG: Don't use stores
-import { writable } from 'svelte/store';
-const count = writable(0);
-
-// ❌ WRONG: Don't use event dispatcher
-const dispatch = createEventDispatcher();
-dispatch('change', value);
-
-// ❌ WRONG: Don't use on: directives
-<button on:click={handler}>
-<form on:submit|preventDefault={submit}>
-
-// ❌ WRONG: Don't use slots
-<slot name="header">
-<div slot="content">
-```
 
 ### ✅ ALWAYS Use These Svelte 5 Patterns:
 ```javascript
@@ -274,6 +276,11 @@ function handleChange(newValue) {
    // ✅ Svelte 5 - Do use snippets
    {#if header}{@render header()}{:else}Default{/if}
    ```
+
+
+# 1.2.1 to get a param value eg. slug from the the url path
+import { page } from '$app/state';
+  let slug = page.params.slug;
 
 ### 1.3 Component Lifecycle and Effects
 
