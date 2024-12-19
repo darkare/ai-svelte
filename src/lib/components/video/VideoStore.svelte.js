@@ -15,7 +15,8 @@ class VideoStore {
 	}
 
 	getTopics() {
-		return [...new Set(this.videos.map((video) => video.topic))];
+		const topics = this.videos.map((video) => video.topic);
+		return Array.from(new Set(topics));
 	}
 
 	getVideosByTopics(topicString) {
